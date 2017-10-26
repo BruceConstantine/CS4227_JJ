@@ -46,5 +46,8 @@ public class Initaliser {
 //		initalisationSummary.append();
 //		return initalisationSummary;
 //	}
+	public void method(){
+		///
+	}
 	
 }
