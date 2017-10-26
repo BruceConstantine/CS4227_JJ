@@ -37,6 +37,11 @@ public class Initaliser {
 	private void setConfigManager(ConfigManager configManager) {
 		this.configManager = configManager;
 	}
+	
+	public void test(){
+		deviceManager.createDevices("LIGHT", "light1");
+		
+	}
 
 //	public StringBuilder getSummary() {
 //		StringBuilder initalisationSummary = new StringBuilder();

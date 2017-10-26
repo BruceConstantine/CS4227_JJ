@@ -1,11 +1,14 @@
 package DevicesPackage;
 
+import Memento.memento;
+
 public class Light implements Devices{
 	int state;
 	String name;
 	
 	public Light(String name){
 		this.name = name;
+		this.state = -1;
 	}
 	
 	public String getName(){
@@ -18,6 +21,15 @@ public class Light implements Devices{
 	
 	public void setState(int state){
 		this.state = state; 
+	}
+	
+	public memento createMemento(){
+		return new memento(this.state);
+	}
+	
+	public void restoreMemento(memento m){
+		
+		this.setState(m.getState());
 	}
 	
 }

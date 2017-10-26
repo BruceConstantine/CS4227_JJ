@@ -9,6 +9,8 @@ public class HomeServer {
 	
 	public HomeServer(String configFileName){
 		initalise(configFileName);
+		
+		initaliser.test();
 	}
 	
 	private void initalise(String configFileName) {
