@@ -1,5 +1,10 @@
 package homeServer;
 
+import java.util.List;
+
+import DevicesPackage.Devices;
+import Factory.DevicesFactory;
+
 public class DeviceManager {
 	
 	private DatabaseManager databaseManager;
@@ -19,6 +24,14 @@ public class DeviceManager {
 	
 	public void setDatabaseManager(DatabaseManager databaseManager) {
 		this.databaseManager = databaseManager;
+	}
+	
+	//create devices--meiyu
+	public void createDevices(String type, String name){
+		DevicesFactory df = new DevicesFactory();
+		Devices d = df.createDevices(type, name);
+		
+		databaseManager.registerDevices(d);
 	}
 
 }
