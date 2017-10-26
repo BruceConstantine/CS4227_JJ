@@ -9,8 +9,22 @@ public class DatabaseManager {
 		
 	}		
 
-	protected void updateConfigDetails(ConfigManager configManager) {
-		//update the database IP and credentials using the config manager.
+	protected void setConfigDetails(ConfigManager configManager) {
+		setDatabaseUserName(configManager.getDatabaseUserName());
+		setDatabasePassword(configManager.getDatabasePassword());
+		setDatabaseIP(configManager.getDatabaseIP());
+	}
+
+	public void setDatabaseIP(String datbaseIP) {
+		this.databaseIP = datbaseIP;                    
+	}                               
+                                    
+	public void setDatabasePassword(String datbasePassword) {
+		this.databasePassword = datbasePassword;                     
+	}                               
+                                    
+	public void setDatabaseUserName(String datbaseUserName) {
+		this.databaseUserName = datbaseUserName;
 	}
 
 }

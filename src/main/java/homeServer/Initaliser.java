@@ -7,21 +7,26 @@ public class Initaliser {
 	private ConnectionManager connectionManager;
 	
 	Initaliser(String configFileName, DatabaseManager databaseManager, ConfigManager configManager, DeviceManager deviceManager, ConnectionManager connectionManager){		
+		setConfigManager(configManager);
 		loadConfigFile(configFileName);
-		this.databaseManager = databaseManager;
+		setDatabaseManager(databaseManager);
 		initaliseDatabaseManager();
-		this.deviceManager = deviceManager;
+		setDeviceManager(deviceManager);
 		initalisedeviceManager();
-		this.connectionManager = connectionManager;
+		setConnectionManager(connectionManager);
 		initaliseConnectionManager();
 	}
-	
+
+	public Initaliser() {
+		
+	}
+
 	private void loadConfigFile(String configFileName) {
-		setConfigManager(new ConfigManager(configFileName));
+		configManager.setConfigFileName(configFileName);
 	}
 
 	private void initaliseDatabaseManager() {
-		databaseManager.updateConfigDetails(configManager);		
+		databaseManager.setConfigDetails(configManager);		
 	}
 	
 	private void initaliseConnectionManager() {
@@ -37,14 +42,17 @@ public class Initaliser {
 	private void setConfigManager(ConfigManager configManager) {
 		this.configManager = configManager;
 	}
+	
+	private void setDatabaseManager(DatabaseManager databaseManager) {
+		this.databaseManager =databaseManager;
+	}
+	
+	private void setConnectionManager(ConnectionManager connectionManager) {
+		this.connectionManager = connectionManager;
+	}
 
-//	public StringBuilder getSummary() {
-//		StringBuilder initalisationSummary = new StringBuilder();
-//		initalisationSummary.append();
-//		initalisationSummary.append();
-//		initalisationSummary.append();
-//		initalisationSummary.append();
-//		return initalisationSummary;
-//	}
+	private void setDeviceManager(DeviceManager deviceManager) {
+		this.deviceManager = deviceManager;
+	}
 	
 }

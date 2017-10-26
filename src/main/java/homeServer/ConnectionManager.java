@@ -8,9 +8,12 @@ public class ConnectionManager {
 		this.databaseManager = databaseManager;
 	}
 
+	public ConnectionManager() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public void initalise() {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 
 	public void setDatabaseManager(DatabaseManager databaseManager2) {

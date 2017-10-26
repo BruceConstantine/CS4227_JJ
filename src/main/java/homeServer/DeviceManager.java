@@ -4,7 +4,7 @@ public class DeviceManager {
 	
 	private DatabaseManager databaseManager;
 	
-	public DeviceManager(DatabaseManager databaseManager) {
+	public DeviceManager() {
 		this.databaseManager = databaseManager;
 	}
 	
@@ -13,7 +13,7 @@ public class DeviceManager {
 	}	
 	
 	public void loadDeviceCongigFromDB() {
-		//loads the config for the devices from the data base
+		// loads the configuration information for the device manager from the data base
 		
 	}
 	
