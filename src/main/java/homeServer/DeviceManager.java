@@ -5,7 +5,7 @@ public class DeviceManager {
 	private DatabaseManager databaseManager;
 	
 	public DeviceManager(DatabaseManager databaseManager) {
-		this.databaseManager = databaseManager;
+		setDatabaseManager(databaseManager);
 	}
 	
 	public void initalise() {
@@ -20,5 +20,4 @@ public class DeviceManager {
 	public void setDatabaseManager(DatabaseManager databaseManager) {
 		this.databaseManager = databaseManager;
 	}
-
 }
