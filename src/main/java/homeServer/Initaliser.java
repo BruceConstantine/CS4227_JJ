@@ -30,12 +30,11 @@ public class Initaliser {
 	}
 	
 	private void initaliseConnectionManager() {
-		connectionManager.setDatabaseManager(databaseManager);
+		connectionManager = new ConnectionManager(databaseManager);
 		connectionManager.initalise();
 	}
 	
 	private void initalisedeviceManager() {
-		deviceManager.setDatabaseManager(databaseManager);
 		deviceManager.initalise();
 	}
 	

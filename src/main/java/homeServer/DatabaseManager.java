@@ -1,9 +1,9 @@
 package homeServer;
 
 public class DatabaseManager {
-	private String databaseUserName = "";
-	private String databasePassword = "";
-	private String databaseIP = "";
+	private String databaseUserName = "User10";
+	private String databasePassword = "ASFW$WAFasf45";
+	private String databaseIP = "192.168.1.1";
 	
 	public DatabaseManager() {
 		

@@ -13,7 +13,6 @@ public class HomeServer {
 	
 	private void initalise(String configFileName) {
 		this.initaliser = new Initaliser(configFileName, databaseManager, configManager, deviceManager, connectionManager);
-//		System.out.println(initaliser.getSummary());
 	}
 	
 	public static void main(String[] args) {
