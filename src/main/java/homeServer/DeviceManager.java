@@ -1,5 +1,10 @@
 package homeServer;
 
+import DevicesPackage.Devices;
+import Factory.DevicesFactory;
+import Memento.caretaker;
+
+
 public class DeviceManager {
 	
 	private DatabaseManager databaseManager;
