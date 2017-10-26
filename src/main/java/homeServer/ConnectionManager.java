@@ -5,7 +5,7 @@ public class ConnectionManager {
 	private DatabaseManager databaseManager;
 
 	public ConnectionManager(DatabaseManager databaseManager) {
-		this.databaseManager = databaseManager;
+		setDatabaseManager(databaseManager);
 	}
 
 	public void initalise() {

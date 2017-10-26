@@ -21,16 +21,16 @@ public class Initaliser {
 	}
 
 	private void initaliseDatabaseManager() {
-		databaseManager.updateConfigDetails(configManager);		
+		databaseManager = new DatabaseManager(configManager);		
 	}
 	
 	private void initaliseConnectionManager() {
-		connectionManager.setDatabaseManager(databaseManager);
+		connectionManager = new ConnectionManager(databaseManager);
 		connectionManager.initalise();
 	}
 	
 	private void initalisedeviceManager() {
-		deviceManager.setDatabaseManager(databaseManager);
+		deviceManager = new DeviceManager(databaseManager);
 		deviceManager.initalise();
 	}
 	
