@@ -1,21 +1,15 @@
 package homeServer;
 
-import java.util.List;
-
-import DevicesPackage.Devices;
-import Factory.DevicesFactory;
-import Memento.caretaker;
-import Memento.originator;
-
 public class DeviceManager {
 	
 	private DatabaseManager databaseManager;
 	
 	DevicesFactory df = new DevicesFactory();
 	Devices d;
-	
-	public DeviceManager(DatabaseManager databaseManager) {
+
+	public DeviceManager() {
 		this.databaseManager = databaseManager;
+
 	}
 	
 	public void initalise() {
@@ -23,7 +17,7 @@ public class DeviceManager {
 	}	
 	
 	public void loadDeviceCongigFromDB() {
-		//loads the config for the devices from the data base
+		// loads the configuration information for the device manager from the data base
 		
 	}
 	
@@ -48,5 +42,4 @@ public class DeviceManager {
 		
 		databaseManager.registerDevices(d);
 	}
-
 }

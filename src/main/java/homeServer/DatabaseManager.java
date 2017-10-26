@@ -1,31 +1,30 @@
 package homeServer;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import DevicesPackage.Devices;
-
 public class DatabaseManager {
-	private String databaseUserName = "";
-	private String databasePassword = "";
-	private String databaseIP = "";
-	
-	//to store registered devices--meiyu
-	public List<Devices> devices = new ArrayList<Devices>();
+	private String databaseUserName = "User10";
+	private String databasePassword = "ASFW$WAFasf45";
+	private String databaseIP = "192.168.1.1";
 	
 	public DatabaseManager() {
 		
 	}		
 
-	protected void updateConfigDetails(ConfigManager configManager) {
-		//update the database IP and credentials using the config manager.
+	protected void setConfigDetails(ConfigManager configManager) {
+		setDatabaseUserName(configManager.getDatabaseUserName());
+		setDatabasePassword(configManager.getDatabasePassword());
+		setDatabaseIP(configManager.getDatabaseIP());
 	}
-	
-	//to register devices which already created by device manager--meiyu 
-	public void registerDevices(Devices d){
-		devices.add(d);
-		
+
+	public void setDatabaseIP(String datbaseIP) {
+		this.databaseIP = datbaseIP;                    
+	}                               
+                                    
+	public void setDatabasePassword(String datbasePassword) {
+		this.databasePassword = datbasePassword;                     
+	}                               
+                                    
+	public void setDatabaseUserName(String datbaseUserName) {
+		this.databaseUserName = datbaseUserName;
 	}
-	
 
 }
