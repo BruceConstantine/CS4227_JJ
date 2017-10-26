@@ -7,30 +7,34 @@ public class Initaliser {
 	private ConnectionManager connectionManager;
 	
 	Initaliser(String configFileName, DatabaseManager databaseManager, ConfigManager configManager, DeviceManager deviceManager, ConnectionManager connectionManager){		
+		setConfigManager(configManager);
 		loadConfigFile(configFileName);
-		this.databaseManager = databaseManager;
+		setDatabaseManager(databaseManager);
 		initaliseDatabaseManager();
-		this.deviceManager = deviceManager;
+		setDeviceManager(deviceManager);
 		initalisedeviceManager();
-		this.connectionManager = connectionManager;
+		setConnectionManager(connectionManager);
 		initaliseConnectionManager();
 	}
-	
+
+	public Initaliser() {
+		
+	}
+
 	private void loadConfigFile(String configFileName) {
-		setConfigManager(new ConfigManager(configFileName));
+		configManager.setConfigFileName(configFileName);
 	}
 
 	private void initaliseDatabaseManager() {
-		databaseManager.updateConfigDetails(configManager);		
+		databaseManager.setConfigDetails(configManager);		
 	}
 	
 	private void initaliseConnectionManager() {
-		connectionManager.setDatabaseManager(databaseManager);
+		connectionManager = new ConnectionManager(databaseManager);
 		connectionManager.initalise();
 	}
 	
 	private void initalisedeviceManager() {
-		deviceManager.setDatabaseManager(databaseManager);
 		deviceManager.initalise();
 	}
 	
@@ -38,18 +42,16 @@ public class Initaliser {
 		this.configManager = configManager;
 	}
 	
-	public void test(){
-		deviceManager.createDevices("LIGHT", "light1");
-		
+	private void setDatabaseManager(DatabaseManager databaseManager) {
+		this.databaseManager =databaseManager;
+	}
+	
+	private void setConnectionManager(ConnectionManager connectionManager) {
+		this.connectionManager = connectionManager;
 	}
 
-//	public StringBuilder getSummary() {
-//		StringBuilder initalisationSummary = new StringBuilder();
-//		initalisationSummary.append();
-//		initalisationSummary.append();
-//		initalisationSummary.append();
-//		initalisationSummary.append();
-//		return initalisationSummary;
-//	}
+	private void setDeviceManager(DeviceManager deviceManager) {
+		this.deviceManager = deviceManager;
+	}
 	
 }
