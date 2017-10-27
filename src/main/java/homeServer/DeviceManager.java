@@ -10,9 +10,9 @@ public class DeviceManager {
 	private DatabaseManager databaseManager;
 	
 
-	/*DevicesFactory df = new DevicesFactory();
+	DevicesFactory df = new DevicesFactory();
 	Devices d;
-	*/
+	
 
 
 	public DeviceManager() {

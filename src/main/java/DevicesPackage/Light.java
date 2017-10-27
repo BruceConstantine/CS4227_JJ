@@ -1,6 +1,6 @@
 package DevicesPackage;
 
-import Memento.memento;
+import Memento.*;
 
 public class Light implements Devices{
 	int state;
@@ -24,7 +24,7 @@ public class Light implements Devices{
 	}
 	
 	public memento createMemento(){
-		return new memento(this.state);
+		return new LightMemento(this.state);
 	}
 	
 	public void restoreMemento(memento m){

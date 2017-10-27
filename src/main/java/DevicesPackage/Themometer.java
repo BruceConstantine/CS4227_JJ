@@ -1,6 +1,6 @@
 package DevicesPackage;
 
-import Memento.memento;
+import Memento.*;
 
 public class Themometer implements Devices{
 	int state;
@@ -20,11 +20,17 @@ public class Themometer implements Devices{
 	}
 	
 	public memento createMemento(){
-		return new memento(this.state);
+		return new ThemometerMemento(this.state);
 	}
 	
 	public void restoreMemento(memento m){
 		
 		this.setState(m.getState());
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
