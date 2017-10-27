@@ -9,8 +9,11 @@ public class DeviceManager {
 	
 	private DatabaseManager databaseManager;
 	
-	DevicesFactory df = new DevicesFactory();
+
+	/*DevicesFactory df = new DevicesFactory();
 	Devices d;
+	*/
+
 
 	public DeviceManager() {
 		this.databaseManager = databaseManager;
@@ -29,8 +32,9 @@ public class DeviceManager {
 	public void setDatabaseManager(DatabaseManager databaseManager) {
 		this.databaseManager = databaseManager;
 	}
+
 	
-	//create devices--meiyu
+/*	//create devices--meiyu
 	public void createDevices(String type, String name){
 		d = df.createDevices(type, name);
 		
@@ -47,4 +51,5 @@ public class DeviceManager {
 		
 		databaseManager.registerDevices(d);
 	}
+*/
 }

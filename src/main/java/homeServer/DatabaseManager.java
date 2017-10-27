@@ -33,8 +33,9 @@ public class DatabaseManager {
 		this.databaseUserName = datbaseUserName;
 	}
 	
-	public void registerDevices(Devices d){
+	/*public void registerDevices(Devices d){
 		devices.add(d);
-	}
+
+	}*/
 
 }
