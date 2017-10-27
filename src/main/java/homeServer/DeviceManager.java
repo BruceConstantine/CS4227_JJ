@@ -34,7 +34,7 @@ public class DeviceManager {
 	}
 
 	
-/*	//create devices--meiyu
+	//create devices--meiyu
 	public void createDevices(String type, String name){
 		d = df.createDevices(type, name);
 		
@@ -51,5 +51,5 @@ public class DeviceManager {
 		
 		databaseManager.registerDevices(d);
 	}
-*/
+
 }
