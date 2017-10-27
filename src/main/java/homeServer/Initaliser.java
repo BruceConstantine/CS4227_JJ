@@ -1,32 +1,51 @@
 package homeServer;
 
 public class Initaliser {
+	private AbstractLogger logger;
 	private DatabaseManager databaseManager;
 	private ConfigManager configManager;
 	private DeviceManager deviceManager;
 	private ConnectionManager connectionManager;
 	
-	Initaliser(String configFileName, DatabaseManager databaseManager, ConfigManager configManager, DeviceManager deviceManager, ConnectionManager connectionManager){		
+	Initaliser(AbstractLogger logger, String configFileName, DatabaseManager databaseManager, 
+			ConfigManager configManager, DeviceManager deviceManager, 
+			ConnectionManager connectionManager){	
+		logger.logMessage(1, "[Notice] Initalising");
+		setLogger(logger);
 		setConfigManager(configManager);
 		loadConfigFile(configFileName);
 		setDatabaseManager(databaseManager);
 		initaliseDatabaseManager();
+		initaliseLogger();
 		setDeviceManager(deviceManager);
 		initalisedeviceManager();
 		setConnectionManager(connectionManager);
 		initaliseConnectionManager();
+		
 	}
 
 	public Initaliser() {
 		
 	}
-
+	
+	private void setLogger(AbstractLogger abstractLogger) {
+		this.logger = abstractLogger;
+	}
+	
 	private void loadConfigFile(String configFileName) {
 		configManager.setConfigFileName(configFileName);
+		logger.logMessage(1, "[Notice] Config File Loaded");
 	}
 
 	private void initaliseDatabaseManager() {
-		databaseManager.setConfigDetails(configManager);		
+		databaseManager.setConfigDetails(configManager);
+		logger.logMessage(1, "[Notice] Database Manager Initalised");
+	}
+	
+	private void initaliseLogger() {
+		LoggerFactory loggerFactory= new LoggerFactory();
+		setLogger(loggerFactory.initaliseLoggerChain(databaseManager));
+		logger.logMessage(1, "[Notice] Logger Initalised - Database Manager Loaded");
 	}
 	
 	private void initaliseConnectionManager() {
