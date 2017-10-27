@@ -19,13 +19,12 @@ public abstract class AbstractLogger {
 	}
 	
 	public void logMessage(int level, String message){	
-		if(this.level <= level){
+		if(this.level <= level)
 			write(message);
-		}
-		
-		if(nextLogger !=null){
+		if(nextLogger != null)
 			nextLogger.logMessage(level, message);
-		}
+//		else
+//			System.out.println("next null");
 	}
 	protected void setDatabseManager(DatabaseManager databaseManager){
 		this.databaseManager = databaseManager;

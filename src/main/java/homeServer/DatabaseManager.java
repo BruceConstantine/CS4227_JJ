@@ -29,7 +29,7 @@ public class DatabaseManager {
 
 	public void writeSystemError(String message) {
 		//Execute the code for writing to database 
-		System.out.println("FOR TESTING::WRITING ERROR TO DATABASE");
+		System.out.println("[FOR TESTING::WRITING ERROR TO DATABASE]" + message);
 	}
 
 }

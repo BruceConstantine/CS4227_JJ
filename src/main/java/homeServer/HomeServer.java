@@ -6,7 +6,7 @@ public class HomeServer {
 	private ConfigManager configManager = new ConfigManager();
 	private DeviceManager deviceManager = new DeviceManager();
 	private ConnectionManager connectionManager = new ConnectionManager();
-	private AbstractLogger logger = (new LoggerFactory()).initaliseSystemInfoLogger();
+	private AbstractLogger logger = (new LoggerFactory()).getSystemInfoLogger();
 	
 	public HomeServer(String configFileName){
 		initalise(configFileName);
@@ -15,7 +15,8 @@ public class HomeServer {
 	private void initalise(String configFileName) {
 		this.initaliser = new Initaliser(logger, configFileName, databaseManager, 
 				configManager, deviceManager, connectionManager);
-		logger.logMessage(1, "[Notice] System initalised Sucuesfully");
+		logger =  initaliser.getLogger();
+		logger.logMessage(1, "System initalised Sucuesfully");
 		logger.logMessage(2, "Error No More Program");
 	}
 	

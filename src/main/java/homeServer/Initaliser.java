@@ -10,7 +10,7 @@ public class Initaliser {
 	Initaliser(AbstractLogger logger, String configFileName, DatabaseManager databaseManager, 
 			ConfigManager configManager, DeviceManager deviceManager, 
 			ConnectionManager connectionManager){	
-		logger.logMessage(1, "[Notice] Initalising");
+		logger.logMessage(1, "Initalising");
 		setLogger(logger);
 		setConfigManager(configManager);
 		loadConfigFile(configFileName);
@@ -34,18 +34,20 @@ public class Initaliser {
 	
 	private void loadConfigFile(String configFileName) {
 		configManager.setConfigFileName(configFileName);
-		logger.logMessage(1, "[Notice] Config File Loaded");
+		logger.logMessage(1, "Config File Loaded");
 	}
 
 	private void initaliseDatabaseManager() {
 		databaseManager.setConfigDetails(configManager);
-		logger.logMessage(1, "[Notice] Database Manager Initalised");
+		logger.logMessage(1, "Database Manager Initalised");
 	}
 	
 	private void initaliseLogger() {
 		LoggerFactory loggerFactory= new LoggerFactory();
+//		AbstractLogger testL = loggerFactory.initaliseLoggerChain(databaseManager);
+//		testL.logMessage(2, "message in initaliser");
 		setLogger(loggerFactory.initaliseLoggerChain(databaseManager));
-		logger.logMessage(1, "[Notice] Logger Initalised - Database Manager Loaded");
+		logger.logMessage(1, "Logger Initalised - Database Manager Loaded");
 	}
 	
 	private void initaliseConnectionManager() {
@@ -73,4 +75,7 @@ public class Initaliser {
 		this.deviceManager = deviceManager;
 	}
 	
+	public AbstractLogger getLogger() {
+		return logger;
+	}
 }

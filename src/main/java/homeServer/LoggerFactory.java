@@ -6,7 +6,7 @@ public class LoggerFactory {
 		
 	}
 	
-	public AbstractLogger initaliseSystemInfoLogger() {
+	public AbstractLogger getSystemInfoLogger() {
 		return new SystemInfo(AbstractLogger.SYSTEM_INFO);
 	}
 	

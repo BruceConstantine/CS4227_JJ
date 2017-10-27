@@ -9,8 +9,7 @@ public class SystemError extends AbstractLogger {
 	}
 
 	@Override
-	protected void write(String message) {		
-		databaseManager.writeSystemError(message);
-		
+	protected void write(String message) {	
+		databaseManager.writeSystemError(message);	
 	}
 }
