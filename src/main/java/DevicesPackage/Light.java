@@ -1,18 +1,30 @@
 package DevicesPackage;
 
 import Memento.*;
+import Visitor.Visitor;
 
 public class Light implements Devices{
 	int state;
 	String name;
+	String type;
+	double illumination = 360;
 	
-	public Light(String name){
+	public void accept(Visitor v){
+		v.visit(this);
+		
+	}
+	public Light(String type,String name){
+		this.type = type;
 		this.name = name;
 		this.state = -1;
 	}
 	
-	public String getName(){
+	public String getName() {
 		return name;
+	}
+	
+	public String getType() {
+		return type;
 	}
 	
 	public int getState(){
@@ -23,6 +35,14 @@ public class Light implements Devices{
 		this.state = state; 
 	}
 	
+	public void setIllumination(double newIll){
+		this.illumination = newIll;
+	}
+	
+	public double getIllumination(){
+		return illumination;
+	}
+
 	public memento createMemento(){
 		return new LightMemento(this.state);
 	}

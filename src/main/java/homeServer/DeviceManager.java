@@ -17,6 +17,7 @@ public class DeviceManager {
 
 	public DeviceManager() {
 		this.databaseManager = databaseManager;
+		
 
 	}
 	

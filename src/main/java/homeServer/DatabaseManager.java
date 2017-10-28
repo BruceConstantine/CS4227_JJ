@@ -37,5 +37,8 @@ public class DatabaseManager {
 		devices.add(d);
 
 	}
+	public List<Devices> getDevices(){
+		return devices;
+	}
 
 }

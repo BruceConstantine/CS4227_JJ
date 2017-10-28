@@ -1,14 +1,23 @@
 package DevicesPackage;
 
 import Memento.*;
+import Visitor.Visitor;
 
 public class Themometer implements Devices{
 	int state;
 	String name;
+	String type;
+	double temperature=30;
 	
-	public Themometer(String name){
+	public Themometer(String type,String name){
+		this.type = type;
 		this.name = name;
 		this.state = -1;
+	}
+	
+	public void accept(Visitor v){
+		v.visit(this);
+		
 	}
 	
 	public int getState(){
@@ -17,6 +26,14 @@ public class Themometer implements Devices{
 	
 	public void setState(int state){
 		this.state = state; 
+	}
+	
+	public void setTemperature(double newTem){
+		this.temperature = newTem;
+	}
+	
+	public double getTemperature(){
+		return temperature;
 	}
 	
 	public memento createMemento(){
@@ -28,9 +45,12 @@ public class Themometer implements Devices{
 		this.setState(m.getState());
 	}
 
-	@Override
+	
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return name;
+	}
+	
+	public String getType() {
+		return type;
 	}
 }
