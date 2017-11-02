@@ -50,7 +50,7 @@ public class DeviceManager {
 		System.out.println("(3)device: "+d.getName()+" state: "+d.getState());
 		
 		
-		databaseManager.registerDevices(d);
+		//databaseManager.registerDevices(d);
 	}
 
 }
