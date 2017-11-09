@@ -30,6 +30,7 @@ public class DeviceManager {
 		//load devices information from DB, type, name, classId
 		this.databaseManager = databaseManager;
 		loadDeviceCongigFromDB();
+		//visitDevices();
 		
 	}	
 	
@@ -52,28 +53,21 @@ public class DeviceManager {
 	public void createDevices(String type, String name, String classId){
 		Devices d = df.createDevices(type, name, classId);
 		devices.add(d);
-		/*System.out.println("(1)device: "+d.getName()+" state: "+d.getState());
-		
-		Caretaker c = new Caretaker();
-		c.setmemento(d.createMemento());
-		d.setState(1);
-		System.out.println("(2)device: "+d.getName()+" state: "+d.getState());
-		
-		d.restoreMemento(c.getMemento());
-		System.out.println("(3)device: "+d.getName()+" state: "+d.getState());
-		*/
-		
-		//databaseManager.registerDevices(d);
 	}
 	
+	public void storeStateOfDevice(){
+		Caretaker c = new Caretaker();
+		
+		for(Devices d: devices){
+			c.setmemento(d.createMemento());
+		}
+		
+	}
 	public void visitDevices(){
 		Visitor v = new InfoVisitor();
 		
 		for(Devices d: devices ){
 			d.accept(v);
-		}
-		
-		
+		}	
 	}
-
 }

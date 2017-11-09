@@ -14,6 +14,9 @@ public interface Devices {
 	public void setState(int state);
 	public String getName();
 	
+	public void turnOn();
+	public void turnOff();
+	
 	public I_Memento createMemento();
 	public void restoreMemento(I_Memento m);
 	

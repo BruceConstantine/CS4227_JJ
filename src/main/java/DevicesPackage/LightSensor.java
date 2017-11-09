@@ -45,6 +45,14 @@ public class LightSensor implements Devices{
 		return illumination;
 	}
 	
+	public void turnOn(){
+		this.state = 1;
+	}
+	
+	public void turnOff(){
+		this.state = 0;
+	}
+	
 	public I_Memento createMemento() {
 		return new ConcreteMemento(this.state);
 	}

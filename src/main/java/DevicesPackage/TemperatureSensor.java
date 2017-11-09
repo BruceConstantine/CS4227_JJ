@@ -44,6 +44,14 @@ public class TemperatureSensor implements Devices{
 		return temperature;
 	}
 
+	public void turnOn(){
+		this.state = 1;
+	}
+	
+	public void turnOff(){
+		this.state = 0;
+	}
+	
 	public I_Memento createMemento() {
 		return new ConcreteMemento(this.state);
 	}
