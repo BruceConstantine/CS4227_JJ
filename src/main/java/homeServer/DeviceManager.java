@@ -63,6 +63,7 @@ public class DeviceManager {
 		}
 		
 	}
+	
 	public void visitDevices(){
 		Visitor v = new InfoVisitor();
 		

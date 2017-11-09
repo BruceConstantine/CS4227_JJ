@@ -42,6 +42,9 @@ public class Light implements Devices{
 		this.state = 0;
 	}
 	
+	public void turnUp(){
+		
+	}
 	public I_Memento createMemento(){
 		return new ConcreteMemento(this.state);
 	}
