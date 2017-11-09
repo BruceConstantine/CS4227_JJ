@@ -1,0 +1,17 @@
+{
+"homeServerID" :"",
+"homeServerPassword" : "",
+"userID" : "",
+"userPassword" : "", 
+"value" : "", 
+"action" : ""
+}
+
+{
+	"homeServerID" :"MurphysServer",
+	"homeServerPassword" : "homeServerPassword",
+	"userID" : "Murphy",
+	"userPassword" : "userPassword",
+	"value" : "192.168.1.1", 
+	"action" : "storeIP"
+}
