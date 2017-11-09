@@ -13,11 +13,9 @@ import Visitor.Visitor;
 public class DeviceManager {
 	
 	private DatabaseManager databaseManager;
-	
-
-	DevicesFactory df = new DevicesFactory();
-	public List<Devices> devices = new ArrayList<Devices>();
-	
+	private DevicesFactory df = new DevicesFactory();
+	private List<Devices> devices = new ArrayList<Devices>();
+	private Caretaker caretaker = new Caretaker();
 
 
 	public DeviceManager() {
@@ -53,13 +51,34 @@ public class DeviceManager {
 	public void createDevices(String type, String name, String classId){
 		Devices d = df.createDevices(type, name, classId);
 		devices.add(d);
+		
+		/*storeStateOfDevice();
+		
+		System.out.println("(1)device state: "+d.getState());
+		d.setState(1);
+		System.out.println("(2)device state: "+d.getState());
+		undo("ls");
+		System.out.println("(3)device state: "+d.getState());
+		*/
+		
+		
 	}
 	
-	public void storeStateOfDevice(){
-		Caretaker c = new Caretaker();
-		
+	public void undo(String name1){
 		for(Devices d: devices){
-			c.setmemento(d.createMemento());
+			if(d.getName().equals(name1)){
+				d.restoreMemento(caretaker.getMemento());
+			}
+		}
+	}
+	
+	/*excuteCommand(typenameclasID, ACTION){
+		D.TURNON
+	}*/
+	
+	public void storeStateOfDevice(){
+		for(Devices d: devices ){
+			caretaker.setmemento(d.createMemento());
 		}
 		
 	}

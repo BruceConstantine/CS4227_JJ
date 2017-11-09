@@ -11,5 +11,4 @@ public class Caretaker {
 		this.m=m;
 	}
 	
-	
 }

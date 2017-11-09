@@ -4,9 +4,9 @@ import Memento.*;
 import Visitor.Visitor;
 
 public class Light implements Devices{
-	int state;
-	String name;
-	String classId;
+	private int state;
+	private String name;
+	private String classId;
 	
 	public Light(String name,String classId){
 		this.name = name;

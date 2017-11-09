@@ -4,9 +4,9 @@ import Memento.*;
 import Visitor.Visitor;
 
 public class Themometer implements Devices{
-	int state;
-	String name;
-	String classId;
+	private int state;
+	private String name;
+	private String classId;
 	
 	public Themometer(String name, String classId){
 		this.name = name;

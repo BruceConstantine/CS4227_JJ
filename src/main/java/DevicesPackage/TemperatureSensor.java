@@ -5,10 +5,10 @@ import Memento.I_Memento;
 import Visitor.Visitor;
 
 public class TemperatureSensor implements Devices{
-	int state = -1;
-	String name = "";
-	String classId = "";
-	double temperature=30;
+	private int state = -1;
+	private String name = "";
+	private String classId = "";
+	private double temperature=30;
 	
 	public TemperatureSensor(String name,String classId){
 		this.name = name;
@@ -57,7 +57,7 @@ public class TemperatureSensor implements Devices{
 	}
 
 	public void restoreMemento(I_Memento m) {
-		
+		this.state = m.getState();
 	}
 
 	public void accept(Visitor v) {

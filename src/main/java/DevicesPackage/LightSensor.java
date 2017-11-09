@@ -6,10 +6,10 @@ import Visitor.Visitor;
 
 public class LightSensor implements Devices{
 	
-	int state = -1;
-	String name = "";
-	String classId = "";
-	double illumination = 360;
+	private int state = -1;
+	private String name = "";
+	private String classId = "";
+	private double illumination = 360;
 	
 	public LightSensor(String name,String classId){
 		this.name = name;
@@ -58,7 +58,7 @@ public class LightSensor implements Devices{
 	}
 
 	public void restoreMemento(I_Memento m) {
-		
+		this.state = m.getState();
 	}
 
 	public void accept(Visitor v) {
