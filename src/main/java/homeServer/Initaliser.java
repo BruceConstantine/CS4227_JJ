@@ -35,7 +35,7 @@ public class Initaliser {
 	}
 	
 	private void initalisedeviceManager() {
-		deviceManager.initalise();
+		deviceManager.initalise(databaseManager);
 	}
 	
 	private void setConfigManager(ConfigManager configManager) {

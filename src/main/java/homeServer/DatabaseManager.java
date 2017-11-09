@@ -10,7 +10,8 @@ public class DatabaseManager {
 	private String databasePassword = "ASFW$WAFasf45";
 	private String databaseIP = "192.168.1.1";
 	
-	public List<Devices> devices = new ArrayList<Devices>();
+	
+	
 	public DatabaseManager() {
 		
 	}		
@@ -33,12 +34,10 @@ public class DatabaseManager {
 		this.databaseUserName = datbaseUserName;
 	}
 	
-	public void registerDevices(Devices d){
-		devices.add(d);
-
+	public String getDevicesInfoFromDB(){
+		//
+		String dInfo = "type,name,classId";
+		return dInfo;
 	}
-	public List<Devices> getDevices(){
-		return devices;
-	}
-
+	
 }

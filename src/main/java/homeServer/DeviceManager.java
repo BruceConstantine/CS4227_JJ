@@ -1,8 +1,10 @@
 package homeServer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import DevicesPackage.Devices;
 import Factory.DevicesFactory;
-import Memento.caretaker;
 
 
 public class DeviceManager {
@@ -11,7 +13,7 @@ public class DeviceManager {
 	
 
 	DevicesFactory df = new DevicesFactory();
-	Devices d;
+	public List<Devices> devices = new ArrayList<Devices>();
 	
 
 
@@ -21,13 +23,20 @@ public class DeviceManager {
 
 	}
 	
-	public void initalise() {
+	public void initalise(DatabaseManager databaseManager) {
+		//load devices information from DB, type, name, classId
 		loadDeviceCongigFromDB();
+		
 	}	
 	
 	public void loadDeviceCongigFromDB() {
 		// loads the configuration information for the device manager from the data base
+		String dInfo = databaseManager.getDevicesInfoFromDB();
+		String info[] = dInfo.split(",");
 		
+		for(int i=0; i<info.length; i+=3){
+				createDevices(info[i], info[i+1], info[i+2]);
+		}
 	}
 	
 	public void setDatabaseManager(DatabaseManager databaseManager) {
@@ -36,10 +45,11 @@ public class DeviceManager {
 
 	
 	//create devices--meiyu
-	public void createDevices(String type, String name){
-		d = df.createDevices(type, name);
+	public void createDevices(String type, String name, String classId){
+		Devices d = df.createDevices(type, name, classId);
 		
-		System.out.println("(1)device: "+d.getName()+" state: "+d.getState());
+		devices.add(d);
+		/*System.out.println("(1)device: "+d.getName()+" state: "+d.getState());
 		
 		caretaker c = new caretaker();
 		c.setmemento(d.createMemento());
@@ -48,7 +58,7 @@ public class DeviceManager {
 		
 		d.restoreMemento(c.getMemento());
 		System.out.println("(3)device: "+d.getName()+" state: "+d.getState());
-		
+		*/
 		
 		//databaseManager.registerDevices(d);
 	}

@@ -1,22 +1,23 @@
 package Factory;
-import java.util.Stack;
 
 import DevicesPackage.*;
 
 public class DevicesFactory {
 	
 	
-	
-	public Devices createDevices(String type, String name){
-		Stack s = new Stack();
-		s.push(new String("THEMOMETER"));
-		s.push(new String("LIGHT"));
+	public Devices createDevices(String type, String name,String classId){
 		
-		if(type == s.pop().toString()){
-			return new Light(type,name);
-		}
-		else{
-			return new Themometer(type,name);
-		}
+			switch(type){
+			
+			case "THEMOMETER": return new Themometer(name,classId);
+			
+			case "LIGHT": return new Light(name,classId);
+			
+			case "LIGHTSENSOR": return new LightSensor(name,classId); 
+			
+			case "TEMPERATURESENSOR": return new TemperatureSensor(name,classId);
+			
+			default: return new Light(name,classId);
+			}
 	}
 }

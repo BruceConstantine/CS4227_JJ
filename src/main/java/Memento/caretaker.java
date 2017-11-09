@@ -1,13 +1,15 @@
 package Memento;
 
-public class caretaker {
-	private memento m;
+public class Caretaker {
+	private I_Memento m;
 	
-	public memento getMemento(){
+	public I_Memento getMemento(){
 		return m;
 	}
 	
-	public void setmemento(memento m){
+	public void setmemento(I_Memento m){
 		this.m=m;
 	}
+	
+	
 }

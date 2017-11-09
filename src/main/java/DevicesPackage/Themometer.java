@@ -6,12 +6,11 @@ import Visitor.Visitor;
 public class Themometer implements Devices{
 	int state;
 	String name;
-	String type;
-	double temperature=30;
+	String classId;
 	
-	public Themometer(String type,String name){
-		this.type = type;
+	public Themometer(String name, String classId){
 		this.name = name;
+		this.classId = classId;
 		this.state = -1;
 	}
 	
@@ -28,19 +27,21 @@ public class Themometer implements Devices{
 		this.state = state; 
 	}
 	
-	public void setTemperature(double newTem){
-		this.temperature = newTem;
+	
+	
+	public String getClassId(){
+		return classId;
 	}
 	
-	public double getTemperature(){
-		return temperature;
+	public void setClassId(String classId){
+		this.classId = classId;
 	}
 	
-	public memento createMemento(){
-		return new ThemometerMemento(this.state);
+	public I_Memento createMemento(){
+		return new ConcreteMemento(this.state);
 	}
 	
-	public void restoreMemento(memento m){
+	public void restoreMemento(I_Memento m){
 		
 		this.setState(m.getState());
 	}
@@ -49,8 +50,5 @@ public class Themometer implements Devices{
 	public String getName() {
 		return name;
 	}
-	
-	public String getType() {
-		return type;
-	}
+
 }
