@@ -1,7 +1,6 @@
 package homeServer;
 
-import Visitor.Visitor;
-import Visitor.infoVisitor;
+
 import java.util.*;
 import DevicesPackage.*;
 

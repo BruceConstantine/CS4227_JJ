@@ -8,11 +8,6 @@ public class Light implements Devices{
 	String name;
 	String classId;
 	
-	
-	public void accept(Visitor v){
-		v.visit(this);
-		
-	}
 	public Light(String name,String classId){
 		this.name = name;
 		this.classId = classId;
@@ -46,6 +41,11 @@ public class Light implements Devices{
 	public void restoreMemento(I_Memento m){
 		
 		this.setState(m.getState());
+	}
+	
+	public void accept(Visitor v){
+		v.visit(this);
+		
 	}
 	
 	

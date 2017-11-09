@@ -54,6 +54,6 @@ public class LightSensor implements Devices{
 	}
 
 	public void accept(Visitor v) {
-		
+		v.visit(this);
 	}
 }

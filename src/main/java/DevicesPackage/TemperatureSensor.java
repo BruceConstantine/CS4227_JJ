@@ -53,6 +53,6 @@ public class TemperatureSensor implements Devices{
 	}
 
 	public void accept(Visitor v) {
-		
+		v.visit(this);
 	}
 }

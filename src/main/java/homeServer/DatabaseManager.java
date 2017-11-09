@@ -36,7 +36,7 @@ public class DatabaseManager {
 	
 	public String getDevicesInfoFromDB(){
 		//
-		String dInfo = "type,name,classId";
+		String dInfo = "LIGHT,light1,room_upstair";
 		return dInfo;
 	}
 	

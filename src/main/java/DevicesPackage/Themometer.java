@@ -14,11 +14,6 @@ public class Themometer implements Devices{
 		this.state = -1;
 	}
 	
-	public void accept(Visitor v){
-		v.visit(this);
-		
-	}
-	
 	public int getState(){
 		return state;
 	}
@@ -51,4 +46,8 @@ public class Themometer implements Devices{
 		return name;
 	}
 
+	public void accept(Visitor v){
+		v.visit(this);
+		
+	}
 }

@@ -5,6 +5,9 @@ import java.util.List;
 
 import DevicesPackage.Devices;
 import Factory.DevicesFactory;
+import Memento.Caretaker;
+import Visitor.InfoVisitor;
+import Visitor.Visitor;
 
 
 public class DeviceManager {
@@ -25,6 +28,7 @@ public class DeviceManager {
 	
 	public void initalise(DatabaseManager databaseManager) {
 		//load devices information from DB, type, name, classId
+		this.databaseManager = databaseManager;
 		loadDeviceCongigFromDB();
 		
 	}	
@@ -47,11 +51,10 @@ public class DeviceManager {
 	//create devices--meiyu
 	public void createDevices(String type, String name, String classId){
 		Devices d = df.createDevices(type, name, classId);
-		
 		devices.add(d);
 		/*System.out.println("(1)device: "+d.getName()+" state: "+d.getState());
 		
-		caretaker c = new caretaker();
+		Caretaker c = new Caretaker();
 		c.setmemento(d.createMemento());
 		d.setState(1);
 		System.out.println("(2)device: "+d.getName()+" state: "+d.getState());
@@ -61,6 +64,16 @@ public class DeviceManager {
 		*/
 		
 		//databaseManager.registerDevices(d);
+	}
+	
+	public void visitDevices(){
+		Visitor v = new InfoVisitor();
+		
+		for(Devices d: devices ){
+			d.accept(v);
+		}
+		
+		
 	}
 
 }
