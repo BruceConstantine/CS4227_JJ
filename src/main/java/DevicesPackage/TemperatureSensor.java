@@ -1,27 +1,32 @@
 package DevicesPackage;
 
-import DevicesPackage.Devices.ConcreteMemento;
 import Memento.I_Memento;
 import Visitor.Visitor;
 
 public class TemperatureSensor implements Devices{
-	private int state = -1;
-	private String name = "";
-	private String classId = "";
+	private int state;
+	private String deviceId;
+	private String deviceClass;
+	private String deviceType;
 	private double temperature=30;
 	
-	public TemperatureSensor(String name,String classId){
-		this.name = name;
-		this.classId = classId;
+	public TemperatureSensor(String deviceType, String deviceId, String deviceClass){
+		this.deviceType = deviceType;
+		this.deviceId = deviceId;
+		this.deviceClass = deviceClass;
 		this.state = -1;
 	}
 	
-	public String getClassId(){
-		return classId;
+	public String getDeviceType() {
+		return deviceType;
 	}
 	
-	public void setClassId(String classId){
-		this.classId = classId;
+	public String getDeviceId() {
+		return deviceId;
+	}
+	
+	public String getDeviceClass(){
+		return deviceClass;
 	}
 	
 	public int getState(){
@@ -30,10 +35,6 @@ public class TemperatureSensor implements Devices{
 	
 	public void setState(int state){
 		this.state = state;
-	}
-	
-	public String getName(){
-		return name;
 	}
 	
 	public void setTemperature(double newTem){

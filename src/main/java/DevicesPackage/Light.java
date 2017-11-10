@@ -5,17 +5,27 @@ import Visitor.Visitor;
 
 public class Light implements Devices{
 	private int state;
-	private String name;
-	private String classId;
+	private String deviceId;
+	private String deviceClass;
+	private String deviceType;
 	
-	public Light(String name,String classId){
-		this.name = name;
-		this.classId = classId;
+	public Light(String deviceType, String deviceId, String deviceClass){
+		this.deviceType = deviceType;
+		this.deviceId = deviceId;
+		this.deviceClass = deviceClass;
 		this.state = -1;
 	}
 	
-	public String getName() {
-		return name;
+	public String getDeviceType() {
+		return deviceType;
+	}
+	
+	public String getDeviceId() {
+		return deviceId;
+	}
+	
+	public String getDeviceClass(){
+		return deviceClass;
 	}
 	
 	public int getState(){
@@ -26,12 +36,8 @@ public class Light implements Devices{
 		this.state = state; 
 	}
 	
-	public String getClassId(){
-		return classId;
-	}
-	
-	public void setClassId(String classId){
-		this.classId = classId;
+	public void setDeviceClass(String deviceClass){
+		this.deviceClass = deviceClass;
 	}
 	
 	public void turnOn(){
@@ -58,6 +64,9 @@ public class Light implements Devices{
 		v.visit(this);
 		
 	}
+
+	
+	
 	
 	
 }

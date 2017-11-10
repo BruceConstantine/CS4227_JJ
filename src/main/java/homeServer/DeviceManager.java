@@ -16,12 +16,17 @@ public class DeviceManager {
 	private DevicesFactory df = new DevicesFactory();
 	private List<Devices> devices = new ArrayList<Devices>();
 	private Caretaker caretaker = new Caretaker();
-
+	
+	/*private List<String> DevicesClass = new ArrayList<String>();
+	
+	{
+		DevicesClass.add("room1");
+		DevicesClass.add("room2");
+		DevicesClass.add("room3");
+	}*/
 
 	public DeviceManager() {
 		this.databaseManager = databaseManager;
-		
-
 	}
 	
 	public void initalise(DatabaseManager databaseManager) {
@@ -48,8 +53,8 @@ public class DeviceManager {
 
 	
 	//create devices--meiyu
-	public void createDevices(String type, String name, String classId){
-		Devices d = df.createDevices(type, name, classId);
+	public void createDevices(String deviceType, String deviceId, String deviceClass){
+		Devices d = df.createDevices(deviceType, deviceId, deviceClass);
 		devices.add(d);
 		
 		/*storeStateOfDevice();
@@ -64,18 +69,21 @@ public class DeviceManager {
 		
 	}
 	
-	public void undo(String name1){
+	
+	
+	public void undo(String deviceName){
 		for(Devices d: devices){
-			if(d.getName().equals(name1)){
+			if(d.getDeviceId().equals(deviceName)){
 				d.restoreMemento(caretaker.getMemento());
 			}
 		}
 	}
 	
-	/*excuteCommand(typenameclasID, ACTION){
-		D.TURNON
+	/*excuteCommand(typenameclasID, ACTION)*/
+	/*public void handleProcdureCommand(ProcedureCommand ){
+		
+		
 	}*/
-	
 	public void storeStateOfDevice(){
 		for(Devices d: devices ){
 			caretaker.setmemento(d.createMemento());
@@ -90,4 +98,5 @@ public class DeviceManager {
 			d.accept(v);
 		}	
 	}
+	
 }

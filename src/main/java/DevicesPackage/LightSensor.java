@@ -6,35 +6,36 @@ import Visitor.Visitor;
 
 public class LightSensor implements Devices{
 	
-	private int state = -1;
-	private String name = "";
-	private String classId = "";
+	private int state;
+	private String deviceId;
+	private String deviceClass;
+	private String deviceType;
 	private double illumination = 360;
 	
-	public LightSensor(String name,String classId){
-		this.name = name;
-		this.classId = classId;
+	public LightSensor(String deviceType, String deviceId, String deviceClass){
+		this.deviceType = deviceType;
+		this.deviceId = deviceId;
+		this.deviceClass = deviceClass;
 		this.state = -1;
 	}
 	
-	public String getClassId(){
-		return classId;
+	public String getDeviceType() {
+		return deviceType;
 	}
 	
-	public void setClassId(String classId){
-		this.classId = classId;
+	public String getDeviceId() {
+		return deviceId;
 	}
 	
+	public String getDeviceClass(){
+		return deviceClass;
+	}
 	public int getState(){
 		return state;
 	}
 	
 	public void setState(int state){
 		this.state = state;
-	}
-	
-	public String getName(){
-		return name;
 	}
 
 	public void setIllumination(double newIll){

@@ -5,14 +5,16 @@ import Visitor.Visitor;
 
 public interface Devices {
 	int state = -1;
-	String name = "";
-	String classId = "";
+	String deviceId = "";
+	String deviceClass = "";
+	String deviceType = "";
 	
-	public String getClassId();
-	public void setClassId(String classId);
+	
+	public String getDeviceClass();
 	public int getState();
 	public void setState(int state);
-	public String getName();
+	public String getDeviceId();
+	public String getDeviceType();
 	
 	public void turnOn();
 	public void turnOff();
