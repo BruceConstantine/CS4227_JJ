@@ -1,15 +1,9 @@
-package homeServer;
+package hello;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.Reader;
-import java.util.Scanner;
+import homeServer.ConfigManager;
 
-import org.apache.tomcat.jni.File;
-
-import builder.SystemComponent;
-
-public class DatabaseManager implements SystemComponent{
+public class DatabaseManager {
+/**First Ite DatabaseManager**/
 	private String databaseUserName = "User10";
 	private String databasePassword = "ASFW$WAFasf45";
 	private String databaseIP = "192.168.1.1";
@@ -40,6 +34,9 @@ public class DatabaseManager implements SystemComponent{
 		//Execute the code for writing to database 
 		System.out.println("[FOR TESTING::WRITING ERROR TO DATABASE]" + message);
 	}
+/**END OF *First Ite DatabaseManager**/
+	
+	
 	public boolean validateUserCredentials(String userName, String userPassword) {
 		// Check user credentials against the users in the database. 
 		if(userName.equals("Martin") && userPassword.equals("userPW"))
@@ -57,34 +54,7 @@ public class DatabaseManager implements SystemComponent{
 			return true;	
 		return false;
 	}
-/////////////////    read info of device  from database   //////////////////////
 
-	public Scanner getPrecedureStoreReader() {
-		Scanner in = null;
-		in = new Scanner("homeServer/schedular/dbReader/procedureStore.txt");
-		return  in;
-	}
-	
-	public String getPrecedureStoreContent() {
-		String result = "";
-		String filename = "src\\main\\java\\homeServer\\schedular\\dbReader\\procedureStore.txt";
-		Scanner in = null;
-		try {
-			in = new Scanner(new java.io.File(filename));
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		while(in.hasNext()){
-			result+=in.nextLine()+";";
-		}
-		return result;
-	}
-	
-	public String getDevicesInfoFromDB(){
-		//
-		String dInfo = "type,name,classId";
-		return dInfo;
-	}
-	
+
+
 }
