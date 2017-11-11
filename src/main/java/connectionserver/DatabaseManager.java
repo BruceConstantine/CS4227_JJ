@@ -2,6 +2,7 @@ package connectionserver;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
@@ -44,38 +45,43 @@ public class DatabaseManager {
 		return false;
 	}
 
-	public void storeIP(String userID, String ipAddress) {  			
-		BasicAWSCredentials credsa = new BasicAWSCredentials("AKIAJEA5BSRQX7CS7VEQ", "PkV3fl7Zb+naYLkCiDpGwBdXfj5ny6FUKm70G5V6"); 
-		AmazonS3 s3Clienta = AmazonS3ClientBuilder.standard().withCredentials(
-        		new AWSStaticCredentialsProvider(credsa)).build();      
-		S3Object object = s3Clienta.getObject(
-		                  new GetObjectRequest("PkV3fl7Zb+naYLkCiDpGwBdXfj5ny6FUKm70G5V6", "key"));
-		InputStream objectData = object.getObjectContent();
-		// Process the objectData stream.
-		try {
-			objectData.close();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			throw new RuntimeException(e1.toString());
+	public void storeIP(String userID, String ipAddress) {  		
+        ClassLoader classLoader = getClass().getClassLoader();
+        File output = new File("/tmp/temp");
+		try {     
+			FileWriter fileWriter = new FileWriter(output);
+			fileWriter.write("" + userID + ":" + ipAddress + "");			
+			fileWriter.close();
+			BasicAWSCredentials creds = new BasicAWSCredentials("AKIAJEA5BSRQX7CS7VEQ", 
+					"PkV3fl7Zb+naYLkCiDpGwBdXfj5ny6FUKm70G5V6"); 
+	        AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withCredentials(
+	        		new AWSStaticCredentialsProvider(creds)).build();
+			s3Client.putObject(new PutObjectRequest(
+					"storeuserip", "USER_IP", output));
+		} catch (Exception e) {
+			throw new RuntimeException(e.toString());
 		}
-		
-//        ClassLoader classLoader = getClass().getClassLoader();
-//        File output = new File(classLoader.getResource("USER_IP").getFile());
-//		try {     
-//			@SuppressWarnings("resource")
-//			FileWriter fileWriter = new FileWriter(output);
-//			fileWriter.write("\"" + userID + "\": \"" + ipAddress + "\"");
-//			BasicAWSCredentials creds = new BasicAWSCredentials("AKIAJEA5BSRQX7CS7VEQ", 
-//					"PkV3fl7Zb+naYLkCiDpGwBdXfj5ny6FUKm70G5V6"); 
-//	        AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withCredentials(
-//	        		new AWSStaticCredentialsProvider(creds)).build();
-//	        
-//	        String bucketName = "storeuserip";
-//			String keyName = "AKIAJEA5BSRQX7CS7VEQ";
-//			s3Client.putObject(new PutObjectRequest(
-//	                bucketName, keyName, output));
-//		} catch (Exception e) {
-//			throw new RuntimeException(e.toString());
-//		}
+	}
+	
+	public String retriveIP(String userID) {  			
+		String stringIP =  "";
+		BasicAWSCredentials creds = new BasicAWSCredentials("AKIAJEA5BSRQX7CS7VEQ", "PkV3fl7Zb+naYLkCiDpGwBdXfj5ny6FUKm70G5V6"); 
+		AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withCredentials(
+        		new AWSStaticCredentialsProvider(creds)).build();      
+		S3Object object = s3Client.getObject(
+		                  new GetObjectRequest("storeuserip", "USER_IP"));
+		InputStream objectData = object.getObjectContent();
+		int in = 0;
+		char inchar;
+		try {
+			while((in =  objectData.read()) != -1) {
+				inchar = (char) in;
+				stringIP += inchar;
+			}
+		} catch (IOException e) {
+			throw new RuntimeException(e.toString());
+		}
+		stringIP = stringIP.substring(stringIP.indexOf(":")+1);
+		return  stringIP;
 	}
 }

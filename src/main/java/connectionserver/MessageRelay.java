@@ -1,12 +1,18 @@
 package connectionserver;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.net.ssl.HttpsURLConnection;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 
-public class RegisterHomeServerIP implements RequestHandler<Map<String, Object>, Map<String, Object>> {
+public class MessageRelay implements RequestHandler<Map<String, Object>, Map<String, Object>> {
 
 	DatabaseManager dbManager =  new DatabaseManager();
 	@Override
@@ -14,11 +20,56 @@ public class RegisterHomeServerIP implements RequestHandler<Map<String, Object>,
 			Context context){
 		this.verifyInputKeys(input);
 		this.validateCredentials(input);
-		this.storeUserIP(input);
 		Map<String, Object> output = new HashMap<String, Object>();
-		output.put("userIP", "has been updated");//, this.retrieveUserIP(input));
+		output.put("DELIVERY_STATUS",relayMessage(input, this.retrieveUserIP(input)));
 		return output;
-		//return this.generateResponse(input);
+	}
+
+	private String relayMessage(Map<String, Object> input, String userIP) {
+		return sendPost(input, userIP, "/device");
+	}
+	
+	private String sendPost(Map<String, Object> input, String ipaddress, String urlParts)  {
+		StringBuffer response;
+		try {
+		URL obj = new URL(ipaddress + urlParts);
+		HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
+
+		//add reuqest header
+		con.setRequestMethod("POST");
+		con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");		
+
+		
+		
+		String message = "{this,}";
+		
+		// Send post request
+		con.setDoOutput(true);
+		DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+		wr.writeBytes(message);
+		wr.flush();
+		wr.close();
+
+		int responseCode = con.getResponseCode();
+		System.out.println("\nSending 'POST' request to URL : " + ipaddress + urlParts);
+		//System.out.println("Post parameters : " + urlParameters);
+		System.out.println("Response Code : " + responseCode);
+
+		BufferedReader in = new BufferedReader(
+		        new InputStreamReader(con.getInputStream()));
+		String inputLine;
+		 response = new StringBuffer();
+
+		while ((inputLine = in.readLine()) != null) {
+			response.append(inputLine);
+		}
+		in.close();
+		//print result
+
+		}catch(Exception e){
+			throw new RuntimeException(e.getMessage());
+		}
+		return response.toString();
 	}
 
 	private void verifyInputKeys(Map<String, Object> input) throws RuntimeException {
@@ -46,10 +97,6 @@ public class RegisterHomeServerIP implements RequestHandler<Map<String, Object>,
 			throw new RuntimeException("Invalid user credintials");
 	}
 
-	private void storeUserIP(Map<String, Object> input) throws RuntimeException {
-		dbManager.storeIP((String) input.get("userID"), (String) input.get("value"));
-	}
-	
 	private String retrieveUserIP(Map<String, Object> input) {
 		return dbManager.retriveIP((String) input.get("userID"));
 	}
@@ -65,5 +112,4 @@ public class RegisterHomeServerIP implements RequestHandler<Map<String, Object>,
 		output.put("value", "IP_STORED_ONLINE");
 		return output;
 	}
-}  
-   
+}
