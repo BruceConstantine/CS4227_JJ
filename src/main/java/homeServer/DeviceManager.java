@@ -67,12 +67,14 @@ public class DeviceManager {
 	
 	//create devices--meiyu
 	public void createDevices(String devicesVersion, String deviceType, String deviceId, String deviceClass){
+		//use abstract factory to create different factory
 		if(devicesVersion.equals("version1"))
 			af = new Version1DevicesFactory();
 		else
 			af = new Version2DevicesFactory();
 		
 		I_Devices d = af.createDevices(deviceType, deviceId, deviceClass);
+		//add device to the list
 		addDevices(d);
 		
 	}
@@ -80,7 +82,7 @@ public class DeviceManager {
 	public void addDevices(I_Devices d){
 		devices.add(d);
 	}
-	/////////////
+	//register devices to sensors but have not finished
 	public void registerLightToLightSensor(){
 		for(I_Devices d: devices){
 			if(d.getDeviceType().equals("LIGHTSENSOR")&&d.getClass().equals("room1")){
@@ -95,6 +97,8 @@ public class DeviceManager {
 		
 		
 	}*/
+	
+	//use memento to store state of devices
 	public void storeStateOfDevice(){
 		for(I_Devices d: devices ){
 			caretaker.setmemento(d.createMemento());
@@ -102,6 +106,7 @@ public class DeviceManager {
 		
 	}
 	
+	//undo: restore the state from memento
 	public void undo(String deviceName){
 		for(I_Devices d: devices){
 			if(d.getDeviceId().equals(deviceName)){
@@ -110,6 +115,7 @@ public class DeviceManager {
 		}
 	}
 	
+	//use visitor to visit devices
 	public void visitDevices(){
 		Visitor v = new InfoVisitor();
 		
