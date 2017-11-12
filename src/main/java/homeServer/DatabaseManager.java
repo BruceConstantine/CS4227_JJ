@@ -3,7 +3,6 @@ package homeServer;
 import java.util.ArrayList;
 import java.util.List;
 
-import DevicesPackage.Devices;
 
 public class DatabaseManager {
 	private String databaseUserName = "User10";
@@ -36,7 +35,7 @@ public class DatabaseManager {
 	
 	public String getDevicesInfoFromDB(){
 		//
-		String dInfo = "LIGHTSENSOR,ls1,room1,LIGHTSENSOR,ls2,room1,LIGHT,l1,room1,LIGHT,l2,room2";
+		String dInfo = "version1,LIGHTSENSOR,ls1,room1,version2,LIGHTSENSOR,ls2,room1,version1,LIGHT,l1,room1,version2,LIGHT,l2,room2";
 		return dInfo;
 	}
 	

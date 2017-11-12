@@ -1,15 +1,16 @@
 package DevicesPackage;
 
-import Memento.*;
+import Memento.I_Memento;
 import Visitor.Visitor;
 
-public class Light implements Devices{
+public class Version1_Light implements I_Light{
 	private int state;
 	private String deviceId;
 	private String deviceClass;
 	private String deviceType;
+	private double illumination = 360;
 	
-	public Light(String deviceType, String deviceId, String deviceClass){
+	public Version1_Light(String deviceType, String deviceId, String deviceClass){
 		this.deviceType = deviceType;
 		this.deviceId = deviceId;
 		this.deviceClass = deviceClass;
@@ -28,16 +29,27 @@ public class Light implements Devices{
 		return deviceClass;
 	}
 	
+	/*public void addDeviceClass(String deviceType) {
+		
+	}
+
+	public void removeDeviceClass() {
+		
+	}*/
+	public void setIllumination(double newIll){
+		this.illumination = newIll;
+	}
+	
+	public double getIllumination(){
+		return illumination;
+	}
+	
 	public int getState(){
 		return state;
 	}
 	
 	public void setState(int state){
 		this.state = state; 
-	}
-	
-	public void setDeviceClass(String deviceClass){
-		this.deviceClass = deviceClass;
 	}
 	
 	public void turnOn(){
@@ -49,8 +61,13 @@ public class Light implements Devices{
 	}
 	
 	public void turnUp(){
-		
+		this.illumination+=10;
 	}
+	
+	public void turnDown(){
+		this.illumination-=10;
+	}
+	
 	public I_Memento createMemento(){
 		return new ConcreteMemento(this.state);
 	}
@@ -64,9 +81,5 @@ public class Light implements Devices{
 		v.visit(this);
 		
 	}
-
-	
-	
-	
 	
 }

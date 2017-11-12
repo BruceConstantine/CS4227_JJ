@@ -1,18 +1,20 @@
 package DevicesPackage;
 
+import java.util.ArrayList;
+import java.util.List;
 
 import Memento.I_Memento;
 import Visitor.Visitor;
 
-public class LightSensor implements Devices{
-	
+public class Version1_LightSensor implements I_Version1_LightSensor{
 	private int state;
 	private String deviceId;
 	private String deviceClass;
 	private String deviceType;
-	private double illumination = 360;
+	private List<I_Light> lights = new ArrayList<I_Light>();
+	private LightSensor_Adapter adapter;
 	
-	public LightSensor(String deviceType, String deviceId, String deviceClass){
+	public Version1_LightSensor(String deviceType, String deviceId, String deviceClass){
 		this.deviceType = deviceType;
 		this.deviceId = deviceId;
 		this.deviceClass = deviceClass;
@@ -38,22 +40,24 @@ public class LightSensor implements Devices{
 		this.state = state;
 	}
 
-	public void setIllumination(double newIll){
-		this.illumination = newIll;
-	}
-	
-	public double getIllumination(){
-		return illumination;
-	}
-	
 	public void turnOn(){
 		this.state = 1;
 	}
-	
+
 	public void turnOff(){
 		this.state = 0;
 	}
 	
+	public void registerLight(I_Light light){
+		lights.add(light);
+	}
+	public List<I_Light> getLights(){
+		return lights;
+	}
+	
+	public void checkIllumination(){
+		adapter.checkIllumination(lights);
+	}
 	public I_Memento createMemento() {
 		return new ConcreteMemento(this.state);
 	}
@@ -65,4 +69,5 @@ public class LightSensor implements Devices{
 	public void accept(Visitor v) {
 		v.visit(this);
 	}
+
 }

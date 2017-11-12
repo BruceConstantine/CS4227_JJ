@@ -3,8 +3,10 @@ package homeServer;
 import java.util.ArrayList;
 import java.util.List;
 
-import DevicesPackage.Devices;
-import Factory.DevicesFactory;
+import DevicesPackage.I_Devices;
+import Factory.AbstractFactory;
+import Factory.Version1DevicesFactory;
+import Factory.Version2DevicesFactory;
 import Memento.Caretaker;
 import Visitor.InfoVisitor;
 import Visitor.Visitor;
@@ -13,8 +15,8 @@ import Visitor.Visitor;
 public class DeviceManager {
 	
 	private DatabaseManager databaseManager;
-	private DevicesFactory df = new DevicesFactory();
-	private List<Devices> devices = new ArrayList<Devices>();
+	private AbstractFactory af ;
+	private List<I_Devices> devices = new ArrayList<I_Devices>();
 	private Caretaker caretaker = new Caretaker();
 	
 	/*private List<String> DevicesClass = new ArrayList<String>();
@@ -33,7 +35,7 @@ public class DeviceManager {
 		//load devices information from DB, type, name, classId
 		this.databaseManager = databaseManager;
 		loadDeviceCongigFromDB();
-		//visitDevices();
+		
 		
 	}	
 	
@@ -42,9 +44,20 @@ public class DeviceManager {
 		String dInfo = databaseManager.getDevicesInfoFromDB();
 		String info[] = dInfo.split(",");
 		
-		for(int i=0; i<info.length; i+=3){
-				createDevices(info[i], info[i+1], info[i+2]);
+		for(int i=0; i<info.length; i+=4){
+				createDevices(info[i], info[i+1], info[i+2], info[i+3]);
 		}
+		
+		/*storeStateOfDevice();
+		
+		System.out.println("(1)device state: "+devices.get(0).getState());
+		devices.get(0).setState(1);
+		System.out.println("(2)device state: "+devices.get(0).getState());
+		undo("ls1");
+		System.out.println("(3)device state: "+devices.get(0).getState());
+		*/
+		//visitDevices();
+		
 	}
 	
 	public void setDatabaseManager(DatabaseManager databaseManager) {
@@ -53,48 +66,54 @@ public class DeviceManager {
 
 	
 	//create devices--meiyu
-	public void createDevices(String deviceType, String deviceId, String deviceClass){
-		Devices d = df.createDevices(deviceType, deviceId, deviceClass);
-		devices.add(d);
+	public void createDevices(String devicesVersion, String deviceType, String deviceId, String deviceClass){
+		if(devicesVersion.equals("version1"))
+			af = new Version1DevicesFactory();
+		else
+			af = new Version2DevicesFactory();
 		
-		/*storeStateOfDevice();
-		
-		System.out.println("(1)device state: "+d.getState());
-		d.setState(1);
-		System.out.println("(2)device state: "+d.getState());
-		undo("ls");
-		System.out.println("(3)device state: "+d.getState());
-		*/
-		
+		I_Devices d = af.createDevices(deviceType, deviceId, deviceClass);
+		addDevices(d);
 		
 	}
 	
-	
-	
-	public void undo(String deviceName){
-		for(Devices d: devices){
-			if(d.getDeviceId().equals(deviceName)){
-				d.restoreMemento(caretaker.getMemento());
+	public void addDevices(I_Devices d){
+		devices.add(d);
+	}
+	/////////////
+	public void registerLightToLightSensor(){
+		for(I_Devices d: devices){
+			if(d.getDeviceType().equals("LIGHTSENSOR")&&d.getClass().equals("room1")){
+				
 			}
+
 		}
 	}
-	
+
 	/*excuteCommand(typenameclasID, ACTION)*/
 	/*public void handleProcdureCommand(ProcedureCommand ){
 		
 		
 	}*/
 	public void storeStateOfDevice(){
-		for(Devices d: devices ){
+		for(I_Devices d: devices ){
 			caretaker.setmemento(d.createMemento());
 		}
 		
 	}
 	
+	public void undo(String deviceName){
+		for(I_Devices d: devices){
+			if(d.getDeviceId().equals(deviceName)){
+				d.restoreMemento(caretaker.getMemento());
+			}
+		}
+	}
+	
 	public void visitDevices(){
 		Visitor v = new InfoVisitor();
 		
-		for(Devices d: devices ){
+		for(I_Devices d: devices ){
 			d.accept(v);
 		}	
 	}

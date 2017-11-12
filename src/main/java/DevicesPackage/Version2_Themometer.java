@@ -3,14 +3,15 @@ package DevicesPackage;
 import Memento.I_Memento;
 import Visitor.Visitor;
 
-public class TemperatureSensor implements Devices{
+public class Version2_Themometer implements I_Themometer{
 	private int state;
 	private String deviceId;
 	private String deviceClass;
 	private String deviceType;
 	private double temperature=30;
 	
-	public TemperatureSensor(String deviceType, String deviceId, String deviceClass){
+	
+	public Version2_Themometer(String deviceType, String deviceId, String deviceClass){
 		this.deviceType = deviceType;
 		this.deviceId = deviceId;
 		this.deviceClass = deviceClass;
@@ -34,7 +35,7 @@ public class TemperatureSensor implements Devices{
 	}
 	
 	public void setState(int state){
-		this.state = state;
+		this.state = state; 
 	}
 	
 	public void setTemperature(double newTem){
@@ -44,7 +45,6 @@ public class TemperatureSensor implements Devices{
 	public double getTemperature(){
 		return temperature;
 	}
-
 	public void turnOn(){
 		this.state = 1;
 	}
@@ -53,15 +53,26 @@ public class TemperatureSensor implements Devices{
 		this.state = 0;
 	}
 	
-	public I_Memento createMemento() {
+	public void turnDown() {
+		this.temperature--;
+	}
+
+	public void turnUp() {
+		this.temperature++;
+	}
+	
+	public I_Memento createMemento(){
 		return new ConcreteMemento(this.state);
 	}
-
-	public void restoreMemento(I_Memento m) {
-		this.state = m.getState();
+	
+	public void restoreMemento(I_Memento m){
+		
+		this.setState(m.getState());
 	}
 
-	public void accept(Visitor v) {
+	public void accept(Visitor v){
 		v.visit(this);
+		
 	}
+
 }

@@ -3,21 +3,19 @@ package DevicesPackage;
 import Memento.I_Memento;
 import Visitor.Visitor;
 
-public interface Devices {
+public interface I_Devices {
 	int state = -1;
 	String deviceId = "";
 	String deviceClass = "";
 	String deviceType = "";
 	
 	
-	public String getDeviceClass();
+	/*public void addDeviceClass(String deviceType);
+	public void removeDeviceClass();*/
 	public int getState();
 	public void setState(int state);
 	public String getDeviceId();
 	public String getDeviceType();
-	
-	public void turnOn();
-	public void turnOff();
 	
 	public I_Memento createMemento();
 	public void restoreMemento(I_Memento m);
